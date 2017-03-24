@@ -11,6 +11,7 @@ import Debug
 
 type Msg
     = NoOp
+    | Play
 
 -- MODEL
 
@@ -40,13 +41,24 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "elm-audio-player" ]
+    div [ class "audio-player" ]
         [ audio
-            [ src model.mediaUrl
-            , id "audio-player"
+            [ id "audiofile"
+            , src model.mediaUrl
+            , controls True
             ]
             []
+        , viewPlayButton model.playing
         ]
+
+viewPlayButton : Bool -> Html Msg
+viewPlayButton playing =
+    button
+        [ class "play"
+        , name "play"
+        , onClick Play
+        ]
+        [ text "Play" ]
 
 main : Program Never Model Msg
 main =
