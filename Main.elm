@@ -6,12 +6,14 @@ import Html.Events exposing (onClick)
 -- import Native.Audio
 import Time
 import Debug
+import Port
 
 -- MSG
 
 type Msg
     = NoOp
     | Play
+    | Pause
 
 -- MODEL
 
@@ -34,6 +36,8 @@ initialModel =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Play ->
+            ( { model | playing = True }, Port.play () )
         _ ->
             Debug.log "Unknown message" ( model, Cmd.none )
 
@@ -53,12 +57,20 @@ view model =
 
 viewPlayButton : Bool -> Html Msg
 viewPlayButton playing =
-    button
-        [ class "play"
-        , name "play"
-        , onClick Play
-        ]
-        [ text "Play" ]
+    if playing then
+        button
+            [ class "pause"
+            , name "pause"
+            , onClick Pause
+            ]
+            [ text "Pause" ]
+    else
+        button
+            [ class "fa fa-pause play"
+            , name "play"
+            , onClick Play
+            ]
+            [ text "Play" ]
 
 main : Program Never Model Msg
 main =

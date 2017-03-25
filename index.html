@@ -9,7 +9,11 @@
   </head>
   <body>
     <script>
-      Elm.Main.fullscreen();
+      app = Elm.Main.fullscreen();
+	  app.ports.play.subscribe(function play() {
+		var audio = document.getElementById('audiofile');
+		audio.play();
+	  });
     </script>
   </body>
 </html>
