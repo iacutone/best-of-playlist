@@ -10,10 +10,15 @@
   <body>
     <script>
       app = Elm.Main.fullscreen();
-	  app.ports.play.subscribe(function play() {
+	  app.ports.play.subscribe(function() {
 		var audio = document.getElementById('audiofile');
 		audio.play();
 	  });
+
+      app.ports.pause.subscribe(function() {
+        var audio = document.getElementById('audiofile');
+        audio.pause();
+      });
     </script>
   </body>
 </html>

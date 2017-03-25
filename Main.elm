@@ -33,11 +33,14 @@ initialModel =
     }
 
 -- UPDATE
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Play ->
             ( { model | playing = True }, Port.play () )
+        Pause ->
+            ( { model | playing = False }, Port.pause() )
         _ ->
             Debug.log "Unknown message" ( model, Cmd.none )
 
@@ -59,14 +62,14 @@ viewPlayButton : Bool -> Html Msg
 viewPlayButton playing =
     if playing then
         button
-            [ class "pause"
+            [ class "fa fa-pause pause"
             , name "pause"
             , onClick Pause
             ]
             [ text "Pause" ]
     else
         button
-            [ class "fa fa-pause play"
+            [ class "fa fa-play play"
             , name "play"
             , onClick Play
             ]
