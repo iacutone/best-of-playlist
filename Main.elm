@@ -19,6 +19,7 @@ type Msg
 
 type alias Model =
     { mediaUrl : String
+    , songName : String
     , playing: Bool
     , duration: Float
     }
@@ -28,6 +29,7 @@ type alias Model =
 initialModel : Model
 initialModel =
     { mediaUrl = "songs/The Julie Ruin - I'm Done.webm"
+    , songName = "The Julie Ruin - I'm Done"
     , playing = False
     , duration = 0.0
     }
@@ -48,6 +50,14 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    div [ class "content" ]
+        [ viewAudio model
+        , viewPlayButton model.playing
+        , viewSong model
+        ]
+
+viewAudio : Model -> Html Msg
+viewAudio model =
     div [ class "audio-player" ]
         [ audio
             [ id "audiofile"
@@ -55,7 +65,13 @@ view model =
             , controls True
             ]
             []
-        , viewPlayButton model.playing
+        ]
+
+viewSong : Model -> Html Msg
+viewSong model =
+    div [ class "viewer" ]
+        [
+            text model.songName
         ]
 
 viewPlayButton : Bool -> Html Msg
