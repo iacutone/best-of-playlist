@@ -8,12 +8,14 @@
     <script src="app.js"></script>
   </head>
   <body>
+    <div id='container'></div>
     <script>
-      app = Elm.Main.fullscreen();
-	  app.ports.play.subscribe(function() {
-		var audio = document.getElementById('audiofile');
-		audio.play();
-	  });
+      var elm = document.getElementById('container');
+
+      app.ports.play.subscribe(function() {
+        var audio = document.getElementById('audiofile');
+        audio.play();
+      });
 
       app.ports.pause.subscribe(function() {
         var audio = document.getElementById('audiofile');
