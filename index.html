@@ -11,6 +11,8 @@
     <div id='container'></div>
     <script>
       var elm = document.getElementById('container');
+      var songs = {songs: [{songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done"}, {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done"}]};
+      app = Elm.Main.embed(elm, songs);
 
       app.ports.play.subscribe(function() {
         var audio = document.getElementById('audiofile');

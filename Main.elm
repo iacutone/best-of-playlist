@@ -7,7 +7,6 @@ import Time
 import Debug
 import Port
 import Json.Decode as Decode exposing (..)
--- import Json.Encode as Encode
 
 -- MSG
 
@@ -20,33 +19,31 @@ type Msg
 -- MODEL
 
 type alias Model =
-    { songs: List Flags
+    { songs: List Song
     , playing: Bool
     , currentTime: Float
     , duration: Float
     }
 
 type alias Flags =
+    { songs: List Song }
+
+type alias Song =
     { songSource: String
     , songName: String
     }
 
 initialModel : Flags -> Model
 initialModel flags =
-    { songs = [flags]
+    { songs = flags.songs
     , playing = False
     , currentTime = 0.0
     , duration = 0.0
     }
 
--- ENCODERS/DECODERS
-
 onTimeUpdate : (Float -> msg) -> Attribute msg
 onTimeUpdate msg =
     on "timeupdate" (Decode.map msg targetCurrentTime)
-
--- A `Json.Decoder` for grabbing `event.target.currentTime`.
--- http://vincent.jousse.org/en/tech/interacting-with-dom-element-using-elm-audio-video/
 
 targetCurrentTime : Decoder Float
 targetCurrentTime =
@@ -76,25 +73,27 @@ view : Model -> Html Msg
 view model =
     div [ class "content" ]
         [ viewPlayButton model.playing
+        , viewSongs model.songs
         , div [ class "flags" ]
         [
             text (toString model.songs)
+            -- text (toString model.songs)
         ]
         ]
 
--- viewSong : Model -> Html Msg
--- viewSong model =
---     div [ class "viewer" ]
---         [
---             text model.songName
---         ]
+audioSong : Song -> Html Msg
+audioSong song =
+    div [ class "elm-audio-player" ]
+        [ audio
+            [ src song.songSource
+            , id "audio-player"
+            ]
+            []
+        ]
 
--- viewTime : Model -> Html Msg
--- viewTime model =
---     div [ class "time" ]
---         [
---             text (toString model.currentTime)
---         ]
+viewSongs : List Song -> Html Msg
+viewSongs songs =
+    ul [] (List.map audioSong songs)
 
 viewPlayButton : Bool -> Html Msg
 viewPlayButton playing =
