@@ -15,14 +15,16 @@ type Msg
     | Play
     | Pause
     | UpdateTime Float
+    | SetDuration Float
 
 -- MODEL
 
 type alias Model =
     { songs: List Song
-    , playing: Bool
+    , currentSong: String
     , currentTime: Float
     , duration: Float
+    , playing: Bool
     }
 
 type alias Flags =
@@ -31,14 +33,16 @@ type alias Flags =
 type alias Song =
     { songSource: String
     , songName: String
+    , id: String
     }
 
 initialModel : Flags -> Model
 initialModel flags =
     { songs = flags.songs
-    , playing = False
+    , currentSong = "song1"
     , currentTime = 0.0
     , duration = 0.0
+    , playing = False
     }
 
 onTimeUpdate : (Float -> msg) -> Attribute msg
@@ -59,11 +63,13 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Play ->
-            ( { model | playing = True }, Port.play () )
+            ( { model | playing = True }, Port.play (model.currentSong) )
         Pause ->
-            ( { model | playing = False }, Port.pause() )
+            ( { model | playing = False }, Port.pause (model.currentSong) )
         UpdateTime time ->
             ( { model | currentTime = time }, Cmd.none )
+        SetDuration time ->
+            ( { model | duration = time }, Cmd.none )
         _ ->
             Debug.log "Unknown message" ( model, Cmd.none )
 
@@ -72,28 +78,25 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ class "content" ]
-        [ viewPlayButton model.playing
-        , viewSongs model.songs
-        , div [ class "flags" ]
-        [
-            text (toString model.songs)
-            -- text (toString model.songs)
-        ]
-        ]
-
-audioSong : Song -> Html Msg
-audioSong song =
-    div [ class "elm-audio-player" ]
-        [ audio
-            [ src song.songSource
-            , id "audio-player"
-            ]
-            []
+        [ viewSongs model.songs
+        , footer model
         ]
 
 viewSongs : List Song -> Html Msg
 viewSongs songs =
     ul [] (List.map audioSong songs)
+
+audioSong : Song -> Html Msg
+audioSong song =
+    li [ class "songs" ]
+        [ text song.songName
+        , audio
+            [ onTimeUpdate UpdateTime
+            , src song.songSource
+            , id song.id
+            ]
+            []
+       ]
 
 viewPlayButton : Bool -> Html Msg
 viewPlayButton playing =
@@ -103,18 +106,44 @@ viewPlayButton playing =
             , name "pause"
             , onClick Pause
             ]
-            [ text "Pause" ]
+            []
     else
         button
             [ class "fa fa-play play"
             , name "play"
             , onClick Play
             ]
-            [ text "Play" ]
+            []
+
+viewSongName : String -> Html Msg
+viewSongName name =
+    div [] [ text name ]
+
+viewSongCurrentTime : Float -> Html Msg
+viewSongCurrentTime time =
+    div [] [ text (toString time) ]
+
+viewSongDuration : Float -> Html Msg
+viewSongDuration duration =
+    div [] [ text (toString duration) ]
+
+footer : Model -> Html Msg
+footer model =
+    div []
+        [ viewPlayButton model.playing
+        , viewSongName model.currentSong
+        , viewSongDuration model.duration
+        , viewSongCurrentTime model.currentTime
+        ]
 
 init : Flags -> (Model, Cmd Msg)
 init flags =
     ( initialModel flags, Cmd.none )
+
+-- SUBSCRIPTIONS
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Port.setDuration SetDuration
 
 main : Program Flags Model Msg
 main =
@@ -122,5 +151,5 @@ main =
         { init = init
         , view = view
         , update = update
-        , subscriptions = (\model -> Sub.none)
+        , subscriptions = subscriptions
         }

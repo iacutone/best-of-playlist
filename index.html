@@ -11,16 +11,17 @@
     <div id='container'></div>
     <script>
       var elm = document.getElementById('container');
-      var songs = {songs: [{songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done"}, {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done"}]};
+      var songs = {songs: [{songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song1"}, {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song2"}]};
       app = Elm.Main.embed(elm, songs);
 
-      app.ports.play.subscribe(function() {
-        var audio = document.getElementById('audiofile');
+      app.ports.play.subscribe(function(event) {
+        var audio = document.getElementById(event);
         audio.play();
+        app.ports.setDuration.send(audio.duration);
       });
 
-      app.ports.pause.subscribe(function() {
-        var audio = document.getElementById('audiofile');
+      app.ports.pause.subscribe(function(event) {
+        var audio = document.getElementById(event);
         audio.pause();
       });
     </script>
