@@ -1,0 +1,86 @@
+.btn-circle {
+  color: white;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 20px;
+  z-index: 10;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.btn-circle:hover {
+  color: white;
+}
+
+.btn-circle:focus {
+  color: white;
+}
+
+.fa-play {
+  background: #0B12E2;
+  padding-left: 5px;
+}
+
+.fa-play:hover {
+  background: #0006AF;
+}
+
+.fa-pause {
+  background: #F90E00;
+}
+
+.fa-pause:hover {
+  background: #DF0D00;
+}
+
+#circle {
+  z-index: -10;
+}
+
+#song-action-container {
+  position: relative;
+  text-align: center;
+}
+
+.songs {
+  padding: 5px;
+  margin-left: 20px;
+}
+
+#playing {
+  background: #4B5AFA;
+  border-radius: 25px;
+  animation: fadeIn 2.0s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    color: black;
+  }
+
+  to {
+    opacity: 1;
+    color: white;
+  }
+}
+
+.columns {
+  min-height: 1px;
+}
+
+#playlist-title {
+  text-align: center;
+}
+
+li {
+  margin-bottom: 0px !important;
+}
+
+li:nth-child(odd) {
+  background: #FAFAFA;
+}
+

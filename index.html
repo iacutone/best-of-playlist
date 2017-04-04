@@ -3,27 +3,51 @@
   <head>
     <title>Best Of</title>
     <link rel="stylesheet" href="style.css">
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="app.js"></script>
   </head>
   <body>
-    <div id='container'></div>
+    <div id="container"></div>
     <script>
       var elm = document.getElementById('container');
-      var songs = {songs: [{songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song1"}, {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song2"}]};
-      app = Elm.Main.embed(elm, songs);
+      var songs = {title: "Top Ten Songs, 2016", songs: [
+        {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song1"},
+        {songSource: "songs/Xenia Rubinos - Mexican Chef.webm", songName: "Xenia Rubinos - Mexican Chef", id: "song2"},
+        {songSource: "songs/Anderson .Paak - Am I Wrong.webm", songName: "Anderson .Paak - Am I Wrong", id: "song3"},
+        {songSource: "songs/Acapulco Lips - Awkward Waltz.m4a", songName: "Acapulco Lips - Awkward Waltz", id: "song4"},
+        {songSource: "songs/Alice Bag - No Means No.m4a", songName: "Alice Bag - No Means No", id: "song5"},
+        {songSource: "songs/Bruno Mars - 24K Magic.webm", songName: "Bruno Mars - 24K Magic", id: "song6"},
+        {songSource: "songs/Jessy Lanza - It Means I Love You.webm", songName: "Jessy Lanza - It Means I Love You", id: "song7"},
+        {songSource: "songs/Badbadnotgood - Time Moves Slow.webm", songName: "Badbadnotgood - Time Moves Slow", id: "song8"},
+        {songSource: "songs/Quilt - Roller.webm", songName: "Quilt - Roller", id: "song9"},
+        {songSource: "songs/A Tribe Called Quest - The Space Program.mp3", songName: "A Tribe Called Quest - The Space Program", id: "song10"}]};
 
+      // var songs = { title: "Best Songs, 2016", songs: [{songSource: "songs/nomercy.mp3", songName: "song 1", id: "song1"}, {songSource: "songs/everything.mp3", songName: "song 2", id: "song2"}]}
+      app = Elm.Main.embed(elm, songs);
       app.ports.play.subscribe(function(event) {
         var audio = document.getElementById(event);
         audio.play();
         app.ports.setDuration.send(audio.duration);
+        app.ports.setSongId.send(audio.id);
+        app.ports.setSongName.send(audio.name);
+        removePlayingIdAttr();
+        audio.parentElement.setAttribute("id", "playing")
       });
 
       app.ports.pause.subscribe(function(event) {
         var audio = document.getElementById(event);
+        removePlayingIdAttr();
         audio.pause();
       });
+
+      removePlayingIdAttr = function() {
+        var songs = document.getElementsByClassName("songs");
+        for (i = 0; i < songs.length; i++) {
+          songs[i].setAttribute("id", "");
+        }
+      }
     </script>
   </body>
 </html>
