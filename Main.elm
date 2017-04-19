@@ -92,7 +92,7 @@ update msg model =
             ( { model | currentSongName = msg }, Cmd.none )
         PlayNextSong msg ->
             if toFloat (List.length model.songs) == model.position then
-                ( model, Cmd.none )
+                ( { model | currentSongId = "song1", position = 1 }, Port.play ("song1") )
             else
                 let
                     song = "song" ++ toString (model.position + 1)

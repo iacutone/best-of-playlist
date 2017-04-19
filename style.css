@@ -52,8 +52,12 @@
 
 #playing {
   background: #4B5AFA;
-  border-radius: 25px;
   animation: fadeIn 2.0s forwards;
+
+}
+
+#playing:nth-child(odd) {
+  border-radius: 25px;
 }
 
 @keyframes fadeIn {
@@ -82,5 +86,6 @@ li {
 
 li:nth-child(odd) {
   background: #FAFAFA;
+  border-radius: 25px;
 }
 
