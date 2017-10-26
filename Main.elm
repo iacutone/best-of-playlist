@@ -105,15 +105,11 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container content" ]
-        [ div [ class "row" ]
-            [ div [ class "three columns" ] [],
-                div [ class "six columns" ]
-                [ viewTitle model.title
-                , viewSongs model.songs
-                , songActions model
-                ],
-            div [ class "three columns" ] []
+    div [ class "flex-grid content" ]
+        [ div [ class "songs-wrapper" ]
+            [ viewTitle model.title
+            , viewSongs model.songs
+            , songActions model
             ]
         ]
 
