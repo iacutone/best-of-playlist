@@ -8611,6 +8611,22 @@ var _user$project$Port$pause = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return v;
 	});
+var _user$project$Port$previous = _elm_lang$core$Native_Platform.outgoingPort(
+	'previous',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$Port$next = _elm_lang$core$Native_Platform.outgoingPort(
+	'next',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
 var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort('setDuration', _elm_lang$core$Json_Decode$float);
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
@@ -8697,6 +8713,50 @@ var _user$project$Main$viewCircle = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Main$songToPlay = function (model) {
+	if (_elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Basics$toFloat(
+			_elm_lang$core$List$length(model.songs)),
+		model.position)) {
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{currentSongId: 'song1', position: 1}),
+			_1: _user$project$Port$next(
+				{
+					ctor: '::',
+					_0: model.currentSongId,
+					_1: {
+						ctor: '::',
+						_0: 'song1',
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	} else {
+		var song = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'song',
+			_elm_lang$core$Basics$toString(model.position + 1));
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{position: model.position + 1}),
+			_1: _user$project$Port$next(
+				{
+					ctor: '::',
+					_0: model.currentSongId,
+					_1: {
+						ctor: '::',
+						_0: song,
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	}
+};
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -8749,36 +8809,58 @@ var _user$project$Main$update = F2(
 						{currentSongName: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'NextSong':
+				return _user$project$Main$songToPlay(model);
 			case 'PlayNextSong':
+				return _user$project$Main$songToPlay(model);
+			default:
 				if (_elm_lang$core$Native_Utils.eq(
-					_elm_lang$core$Basics$toFloat(
-						_elm_lang$core$List$length(model.songs)),
-					model.position)) {
+					model.position,
+					_elm_lang$core$Basics$toFloat(1))) {
+					var playlistLength = _elm_lang$core$Basics$toFloat(
+						_elm_lang$core$List$length(model.songs));
+					var song = A2(
+						_elm_lang$core$Basics_ops['++'],
+						'song',
+						_elm_lang$core$Basics$toString(playlistLength));
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{currentSongId: 'song1', position: 1}),
-						_1: _user$project$Port$play('song1')
+							{currentSongId: song, position: playlistLength}),
+						_1: _user$project$Port$previous(
+							{
+								ctor: '::',
+								_0: model.currentSongId,
+								_1: {
+									ctor: '::',
+									_0: song,
+									_1: {ctor: '[]'}
+								}
+							})
 					};
 				} else {
 					var song = A2(
 						_elm_lang$core$Basics_ops['++'],
 						'song',
-						_elm_lang$core$Basics$toString(model.position + 1));
+						_elm_lang$core$Basics$toString(model.position - 1));
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{position: model.position + 1}),
-						_1: _user$project$Port$play(song)
+							{currentSongId: song, position: model.position - 1}),
+						_1: _user$project$Port$previous(
+							{
+								ctor: '::',
+								_0: model.currentSongId,
+								_1: {
+									ctor: '::',
+									_0: song,
+									_1: {ctor: '[]'}
+								}
+							})
 					};
 				}
-			default:
-				return A2(
-					_elm_lang$core$Debug$log,
-					'Unknown message',
-					{ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none});
 		}
 	});
 var _user$project$Main$targetId = A2(
@@ -8839,8 +8921,46 @@ var _user$project$Main$Song = F3(
 	function (a, b, c) {
 		return {songSource: a, songName: b, id: c};
 	});
-var _user$project$Main$PlayNextSong = function (a) {
-	return {ctor: 'PlayNextSong', _0: a};
+var _user$project$Main$PlayPreviousSong = {ctor: 'PlayPreviousSong'};
+var _user$project$Main$viewPreviousButton = function (playing) {
+	return A2(
+		_elm_lang$html$Html$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('fa fa-backward btn-back'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$PlayPreviousSong),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$disabled(!playing),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Main$PlayNextSong = {ctor: 'PlayNextSong'};
+var _user$project$Main$viewNextButton = function (playing) {
+	return A2(
+		_elm_lang$html$Html$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('fa fa-forward btn-forward'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$PlayNextSong),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$disabled(!playing),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Main$NextSong = function (a) {
+	return {ctor: 'NextSong', _0: a};
 };
 var _user$project$Main$SetSongName = function (a) {
 	return {ctor: 'SetSongName', _0: a};
@@ -8890,7 +9010,7 @@ var _user$project$Main$audioSong = function (song) {
 						_0: _user$project$Main$onTimeUpdate(_user$project$Main$UpdateTime),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Main$onEnd(_user$project$Main$PlayNextSong),
+							_0: _user$project$Main$onEnd(_user$project$Main$NextSong),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Attributes$src(song.songSource),
@@ -8900,7 +9020,11 @@ var _user$project$Main$audioSong = function (song) {
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$id(song.id),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$preload('none'),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}
@@ -8962,11 +9086,19 @@ var _user$project$Main$songActions = function (model) {
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Main$viewPlayButton(model.playing),
+			_0: _user$project$Main$viewPreviousButton(model.playing),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Main$viewCircle(model),
-				_1: {ctor: '[]'}
+				_0: _user$project$Main$viewPlayButton(model.playing),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$viewNextButton(model.playing),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Main$viewCircle(model),
+						_1: {ctor: '[]'}
+					}
+				}
 			}
 		});
 };
@@ -8975,7 +9107,7 @@ var _user$project$Main$view = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('container content'),
+			_0: _elm_lang$html$Html_Attributes$class('flex-grid content'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -8984,51 +9116,18 @@ var _user$project$Main$view = function (model) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('row'),
+					_0: _elm_lang$html$Html_Attributes$class('songs-wrapper'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('three columns'),
-							_1: {ctor: '[]'}
-						},
-						{ctor: '[]'}),
+					_0: _user$project$Main$viewTitle(model.title),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('six columns'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Main$viewTitle(model.title),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Main$viewSongs(model.songs),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Main$songActions(model),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
+						_0: _user$project$Main$viewSongs(model.songs),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('three columns'),
-									_1: {ctor: '[]'}
-								},
-								{ctor: '[]'}),
+							_0: _user$project$Main$songActions(model),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -9070,7 +9169,6 @@ var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
 							A2(_elm_lang$core$Json_Decode$field, 'songName', _elm_lang$core$Json_Decode$string));
 					},
 					A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))))));
-var _user$project$Main$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
