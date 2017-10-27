@@ -3,7 +3,6 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (on, onClick)
-import Debug
 import Port
 import Json.Decode as Decode exposing (..)
 import Svg exposing (svg, circle)
@@ -12,14 +11,15 @@ import Svg.Attributes exposing (cx, cy, r, stroke, fill, strokeWidth, strokeDash
 -- MSG
 
 type Msg
-    = NoOp
-    | Play
+    = Play
     | Pause
     | UpdateTime Float
     | SetDuration Float
     | SetSongId String
     | SetSongName String
-    | PlayNextSong String
+    | NextSong String
+    | PlayNextSong
+    | PlayPreviousSong
 
 -- MODEL
 
@@ -90,16 +90,34 @@ update msg model =
             ( { model | currentSongId = msg }, Cmd.none )
         SetSongName msg ->
             ( { model | currentSongName = msg }, Cmd.none )
-        PlayNextSong msg ->
-            if toFloat (List.length model.songs) == model.position then
-                ( { model | currentSongId = "song1", position = 1 }, Port.play ("song1") )
+        NextSong msg ->
+            songToPlay model
+        PlayNextSong ->
+            songToPlay model
+        PlayPreviousSong ->
+            if (model.position == toFloat 1) then
+                let
+                    playlistLength = toFloat (List.length model.songs)
+                    song = "song" ++ toString playlistLength
+                in
+                    ( { model | currentSongId = song, position = playlistLength }, Port.previous ([model.currentSongId, song]) )
             else
                 let
-                    song = "song" ++ toString (model.position + 1)
+                    song = "song" ++ toString (model.position - 1)
                 in
-                    ( { model | position = model.position + 1 }, Port.play (song) )
-        _ ->
-            Debug.log "Unknown message" ( model, Cmd.none )
+                    ( { model | currentSongId = song, position = model.position - 1 }, Port.previous ([model.currentSongId, song]) )
+
+
+
+songToPlay : Model -> ( Model, Cmd Msg )
+songToPlay model =
+        if toFloat (List.length model.songs) == model.position then
+            ( { model | currentSongId = "song1", position = 1 }, Port.next ([model.currentSongId, "song1"]) )
+        else
+            let
+                song = "song" ++ toString (model.position + 1)
+            in
+                ( { model | position = model.position + 1 }, Port.next ([model.currentSongId, song]) )
 
 -- VIEW
 
@@ -138,17 +156,34 @@ viewTitle title =
 
 audioSong : Song -> Html Msg
 audioSong song =
-    li [ class "songs" ]
+    li [ class "songs"]
         [ text song.songName
         , audio
             [ onTimeUpdate UpdateTime
-            , onEnd PlayNextSong
+            , onEnd NextSong
             , src song.songSource
             , name song.songName
             , id song.id
+            , preload "none"
             ]
             []
        ]
+
+viewPreviousButton : Bool -> Html Msg
+viewPreviousButton playing =
+    button [ class "fa fa-backward btn-back"
+           , onClick PlayPreviousSong
+           , disabled (not playing)
+           ]
+           []
+
+viewNextButton : Bool -> Html Msg
+viewNextButton playing =
+    button [ class "fa fa-forward btn-forward"
+           , onClick PlayNextSong
+           , disabled (not playing)
+           ]
+           []
 
 viewPlayButton : Bool -> Html Msg
 viewPlayButton playing =
@@ -170,7 +205,9 @@ viewPlayButton playing =
 songActions : Model -> Html Msg
 songActions model =
     div [ id "song-action-container" ]
-        [ viewPlayButton model.playing
+        [ viewPreviousButton model.playing
+        , viewPlayButton model.playing
+        , viewNextButton model.playing
         , viewCircle model
         ]
 

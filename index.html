@@ -28,19 +28,54 @@
       app = Elm.Main.embed(elm, songs);
       app.ports.play.subscribe(function(event) {
         var audio = document.getElementById(event);
-        audio.play();
-        app.ports.setDuration.send(audio.duration);
-        app.ports.setSongId.send(audio.id);
-        app.ports.setSongName.send(audio.name);
-        removePlayingIdAttr();
-        audio.parentElement.setAttribute("id", "playing")
+        playSubscription(app, audio);
       });
 
       app.ports.pause.subscribe(function(event) {
-        var audio = document.getElementById(event);
         removePlayingIdAttr();
-        audio.pause();
+
+        var audio = document.getElementById(event);
+        pausePromise(audio, false);
       });
+
+      app.ports.previous.subscribe(function(event) {
+        removePlayingIdAttr();
+
+        var audioStop = document.getElementById(event[0]);
+        pausePromise(audioStop, true);
+        var audioPlay = document.getElementById(event[1]);
+        playSubscription(app, audioPlay);
+      });
+
+      app.ports.next.subscribe(function(event) {
+        removePlayingIdAttr();
+
+        var audioStop = document.getElementById(event[0]);
+        pausePromise(audioStop, true);
+        var audioPlay = document.getElementById(event[1]);
+        playSubscription(app, audioPlay);
+      });
+
+      function playSubscription(app, el) {
+        el.play();
+        app.ports.setDuration.send(el.duration);
+        app.ports.setSongId.send(el.id);
+        app.ports.setSongName.send(el.name);
+        el.parentElement.setAttribute("id", "playing")
+      }
+
+      function pausePromise(el, beginning) {
+        if (el !== undefined) {
+          el.play().then(function() {
+            el.pause();
+            if (beginning) {
+              el.currentTime = 0;
+            }
+          }).catch(function(error) {
+            console.log('Error', error);
+          });
+        }
+      }
 
       removePlayingIdAttr = function() {
         var songs = document.getElementsByClassName("songs");

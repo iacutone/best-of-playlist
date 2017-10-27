@@ -11,6 +11,30 @@
   margin-left: 10px;
 }
 
+.btn-forward {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 100px;
+}
+
+.btn-forward:disabled {
+  cursor: default;
+  background: #FAFAFA;
+  border-color: white;
+}
+
+.btn-back {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: -100px;
+}
+
+.btn-back:disabled {
+  cursor: default;
+  background: #FAFAFA;
+  border-color: white;
+}
+
 .btn-circle:hover {
   color: white;
 }
@@ -43,6 +67,8 @@
 #song-action-container {
   position: relative;
   text-align: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .songs {
@@ -53,7 +79,6 @@
 #playing {
   background: #4B5AFA;
   animation: fadeIn 2.0s forwards;
-
 }
 
 #playing:nth-child(odd) {
@@ -74,10 +99,6 @@
 
 .columns {
   min-height: 1px;
-}
-
-#playlist-title {
-  text-align: center;
 }
 
 li {
