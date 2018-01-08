@@ -22,19 +22,8 @@
     <div id="container"></div>
     <script>
       var elm = document.getElementById('container');
-      var songs = {title: "Top Ten Songs, 2016", songs: [
-        {songSource: "songs/The Julie Ruin - I'm Done.webm", songName: "The Julie Ruin - I'm Done", id: "song1"},
-        {songSource: "songs/Xenia Rubinos - Mexican Chef.webm", songName: "Xenia Rubinos - Mexican Chef", id: "song2"},
-        {songSource: "songs/Klaus Johann Grobe - Geschichten aus erster Hand.webm", songName: "Klaus Johann Grobe - Geschichten aus erster Hand", id: "song3"},
-        {songSource: "songs/Acapulco Lips - Awkward Waltz.m4a", songName: "Acapulco Lips - Awkward Waltz", id: "song4"},
-        {songSource: "songs/Solange - Cranes in the Sky.webm", songName: "Solange - Cranes in the Sky", id: "song5"},
-        {songSource: "songs/Kaytranada - Lite Spots.m4a", songName: "Kaytranada - Lite Spots", id: "song6"},
-        {songSource: "songs/Jessy Lanza - It Means I Love You.webm", songName: "Jessy Lanza - It Means I Love You", id: "song7"},
-        {songSource: "songs/Badbadnotgood - Time Moves Slow.webm", songName: "Badbadnotgood - Time Moves Slow", id: "song8"},
-        {songSource: "songs/Quilt - Roller.webm", songName: "Quilt - Roller", id: "song9"},
-        {songSource: "songs/A Tribe Called Quest - The Space Program.mp3", songName: "A Tribe Called Quest - The Space Program", id: "song10"}]};
 
-      app = Elm.Main.embed(elm, songs);
+      app = Elm.Main.embed(elm);
       app.ports.play.subscribe(function(event) {
         var audio = document.getElementById(event);
         playSubscription(app, audio);

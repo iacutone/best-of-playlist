@@ -67,8 +67,6 @@
 #song-action-container {
   position: relative;
   text-align: center;
-  /* align-items: center; */
-  /* justify-content: center; */
 }
 
 .songs {
@@ -81,10 +79,6 @@
   animation: fadeIn 2.0s forwards;
 }
 
-#playing:nth-child(odd) {
-  border-radius: 25px;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -95,6 +89,10 @@
     opacity: 1;
     color: white;
   }
+}
+
+#playing:nth-child(odd) {
+  border-radius: 25px;
 }
 
 .columns {
@@ -114,4 +112,69 @@ li:nth-child(odd) {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.list-container {
+  display: inline;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.list-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radios {
+  margin-bottom: 20px;
+}
+
+.radio-btn {
+  position: absolute;
+  top: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  margin-right: 150px;
+  margin-left: 10px;
+}
+
+/* On mouse-over, add a grey background color */
+.list-container:hover input ~ .radio-btn {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.list-container input:checked ~ .radio-btn {
+  background-color: #0B12E2;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radio-btn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.list-container input:checked ~ .radio-btn:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.list-container .radio-btn:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }

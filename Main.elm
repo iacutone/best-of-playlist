@@ -7,11 +7,17 @@ import Port
 import Json.Decode as Decode exposing (..)
 import Svg exposing (svg, circle)
 import Svg.Attributes exposing (cx, cy, r, stroke, fill, strokeWidth, strokeDasharray, strokeDashoffset)
+import SongLibrary exposing (..)
+import AnimationFrame
+import Animation exposing (..)
+import Time exposing (second)
+import Ease exposing (..)
 
 -- MSG
 
 type Msg
-    = Play
+    = Select String
+    | Play
     | Pause
     | UpdateTime Float
     | SetDuration Float
@@ -20,18 +26,22 @@ type Msg
     | NextSong String
     | PlayNextSong
     | PlayPreviousSong
+    | CurrentTick Time.Time
 
 -- MODEL
 
 type alias Model =
-    { songs: List Song
+    { playlist: String
+    , activePlaylist: Bool
+    , songs: List Song
     , currentSongId: String
     , currentSongName: String
     , currentTime: Float
     , duration: Float
     , playing: Bool
     , position: Float
-    , title: String
+    , style: Animation
+    , currentBrowserTime: Float
     }
 
 type alias Flags =
@@ -45,16 +55,19 @@ type alias Song =
     , id: String
     }
 
-initialModel : Flags -> Model
-initialModel flags =
-    { songs = flags.songs
+initialModel : Model
+initialModel =
+    { playlist = ""
+    , activePlaylist = False
+    , songs = []
     , currentSongId = "song1"
     , currentSongName = ""
     , currentTime = 0.0
-    , duration = 0.0
+    , duration = 0.1
     , playing = False
     , position = 1
-    , title = flags.title
+    , style = animation 0 |> from 0 |> to 0
+    , currentBrowserTime = 0
     }
 
 onTimeUpdate : (Float -> msg) -> Attribute msg
@@ -78,6 +91,14 @@ targetId =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Select playlist ->
+            case playlist of
+                "2016" ->
+                    ( { model | songs = songs2016, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
+                "2017" ->
+                    ( { model | songs = songs2017, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
+                _ ->
+                    ( { model | songs = [], activePlaylist = False, playing = False, style = animation 0 |> from 0 |> to 0 }, Cmd.none )
         Play ->
             ( { model | playing = True }, Port.play (model.currentSongId) )
         Pause ->
@@ -106,8 +127,17 @@ update msg model =
                     song = "song" ++ toString (model.position - 1)
                 in
                     ( { model | currentSongId = song, position = model.position - 1 }, Port.previous ([model.currentSongId, song]) )
+        CurrentTick time ->
+            ( { model | currentBrowserTime = time }, Cmd.none)
+        -- Animate animMsg ->
+        --     ( { model
+        --         | style = Animation.update animMsg model.style
+        --       }
+        --     , Cmd.none
 
-
+animateOpacity : Time.Time -> Animation
+animateOpacity browserTime =
+    animation browserTime |> duration (1.5*second) |> from 0 |> to 1 |> ease Ease.inQuad
 
 songToPlay : Model -> ( Model, Cmd Msg )
 songToPlay model =
@@ -124,12 +154,36 @@ songToPlay model =
 view : Model -> Html Msg
 view model =
     div [ class "flex-grid content" ]
-        [ div [ class "songs-wrapper" ]
-            [ viewTitle model.title
-            , viewSongs model.songs
-            , songActions model
+        [ div [] 
+            [ div [ class "radios" ]
+                [ viewRadioInput model "2016"
+                , viewRadioInput model "2017"
+                ],
+              viewPlaylist model
             ]
         ]
+
+viewPlaylist : Model -> Html Msg
+viewPlaylist model =
+    let 
+        opacity = Animation.animate model.currentBrowserTime  model.style
+    in
+        div []
+            [ div [ class "songs-wrapper", style [ ("opacity", toString opacity)] ]
+                [ viewSongs model.songs
+                , songActions model
+                ]
+            ]
+
+viewRadioInput : Model -> String -> Html Msg
+viewRadioInput model year =
+    div [ class "" ]
+    [ label [ class "list-container" ]
+          [ input [ type_ "radio", onClick (Select year), checked (model.playlist == year) ] []
+          , text ("Top Ten Songs, " ++ year)
+          , span [ class "radio-btn" ] []
+          ]
+    ]
 
 viewCircle : Model -> Html Msg
 viewCircle model =
@@ -164,7 +218,7 @@ audioSong song =
             , src song.songSource
             , name song.songName
             , id song.id
-            , preload "none"
+            , preload "metadata"
             ]
             []
        ]
@@ -204,16 +258,19 @@ viewPlayButton playing =
 
 songActions : Model -> Html Msg
 songActions model =
-    div [ id "song-action-container" ]
-        [ viewPreviousButton model.playing
-        , viewPlayButton model.playing
-        , viewNextButton model.playing
-        , viewCircle model
-        ]
+    if model.activePlaylist then
+        div [ id "song-action-container" ]
+            [ viewPreviousButton model.playing
+            , viewPlayButton model.playing
+            , viewNextButton model.playing
+            , viewCircle model
+            ]
+    else
+        div [] []
 
-init : Flags -> (Model, Cmd Msg)
-init flags =
-    ( initialModel flags, Cmd.none )
+init : (Model, Cmd Msg)
+init =
+    ( initialModel, Cmd.none )
 
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
@@ -222,11 +279,12 @@ subscriptions model =
         [ Port.setDuration SetDuration
         , Port.setSongId SetSongId
         , Port.setSongName SetSongName
+        , AnimationFrame.times CurrentTick
         ]
 
-main : Program Flags Model Msg
+main : Program Never Model Msg
 main =
-    Html.programWithFlags
+    Html.program
         { init = init
         , view = view
         , update = update
