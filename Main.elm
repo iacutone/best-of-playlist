@@ -31,28 +31,23 @@ type Msg
 -- MODEL
 
 type alias Model =
-    { playlist: String
-    , activePlaylist: Bool
-    , songs: List Song
-    , currentSongId: String
-    , currentSongName: String
-    , currentTime: Float
-    , duration: Float
-    , playing: Bool
-    , position: Float
-    , style: Animation
-    , currentBrowserTime: Float
-    }
-
-type alias Flags =
-    { songs: List Song
-    , title: String
+    { playlist : String
+    , activePlaylist : Bool
+    , songs : List Song
+    , currentSongId : String
+    , currentSongName : String
+    , currentTime : Float
+    , duration : Float
+    , playing : Bool
+    , position : Float
+    , style : Animation
+    , currentBrowserTime : Float
     }
 
 type alias Song =
-    { songSource: String
-    , songName: String
-    , id: String
+    { songSource : String
+    , songName : String
+    , id : String
     }
 
 initialModel : Model
