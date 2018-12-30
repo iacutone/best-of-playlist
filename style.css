@@ -178,3 +178,28 @@ li:nth-child(odd) {
   border-radius: 50%;
   background: white;
 }
+
+#signup-form {
+  text-align: center;
+}
+
+#btn {
+  font-weight: 200;
+  letter-spacing: 1px;
+  transition: 1000ms;
+}
+
+#btn:hover,
+#btn:focus {
+  box-shadow: inset 0px 0px 0px 2px #0006AF;
+}
+
+button {
+  height: 48px;
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+input[type=email] {
+  min-width: 25ch;
+}
