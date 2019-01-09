@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2018 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2018/MJ Cole - Soak It Up.webm', songName: 'MJ Cole - Soak It Up', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2018/Cleo Sol - Miles Song.webm', songName: 'Cleo Sol - Miles Song', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2018/D Double E - Back Then.webm', songName: 'D Double E - Back Then', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2018/Spice Boys - Spice City Boys.m4a', songName: 'Spice Boys - Spice City Boys', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2018/Little Simz - Offence.webm', songName: 'Little Simz - Offence', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2018/Georgia Anne Muldrow - Overload.webm', songName: 'Georgia Anne Muldrow - Overload', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2018/Blue Wednesday - Suede.webm', songName: 'Blue Wednesday - Suede', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2018/Nu Guinea - Ddoje Facce.webm', songName: 'Nu Guinea - Ddoje Facce', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2018/The Internet - Come Together.webm', songName: 'The Internet - Come Together', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2018/The True Loves - The Dapper Derp.m4a', songName: 'The True Loves - The Dapper Derp', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2017 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2017/Gregor Salto - Magalenha.webm', songName: 'Gregor Salto - Magalenha', id: 'song1'},
@@ -9667,7 +9708,7 @@ var _user$project$SongLibrary$songs2017 = {
 								_0: {songSource: 'songs/2017/Bomba Estereo - Amar Asi.webm', songName: 'Bomba Estereo - Amar Asi', id: 'song8'},
 								_1: {
 									ctor: '::',
-									_0: {songSource: 'songs/2017/Run the Jewels - Call Ticketron.webm', songName: 'Run the Jewels - Call Ticketron', id: 'song9'},
+									_0: {songSource: 'songs/2017/Kevin Morby - City Music.webm', songName: 'Kevin Morby - City Music', id: 'song9'},
 									_1: {
 										ctor: '::',
 										_0: {songSource: 'songs/2017/Beck - Up All Night.webm', songName: 'Beck - Up All Night', id: 'song10'},
@@ -9901,6 +9942,20 @@ var _user$project$Main$update = F2(
 								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
+					case '2018':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2018,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 					default:
 						return {
 							ctor: '_Tuple2',
@@ -10110,10 +10165,6 @@ var _user$project$Main$Model = function (a) {
 		};
 	};
 };
-var _user$project$Main$Flags = F2(
-	function (a, b) {
-		return {songs: a, title: b};
-	});
 var _user$project$Main$Song = F3(
 	function (a, b, c) {
 		return {songSource: a, songName: b, id: c};
@@ -10392,7 +10443,7 @@ var _user$project$Main$viewRadioInput = F2(
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html$text(
-								A2(_elm_lang$core$Basics_ops['++'], 'Top Ten Songs, ', year)),
+								A2(_elm_lang$core$Basics_ops['++'], 'Top Songs, ', year)),
 							_1: {
 								ctor: '::',
 								_0: A2(
@@ -10438,7 +10489,11 @@ var _user$project$Main$view = function (model) {
 							_1: {
 								ctor: '::',
 								_0: A2(_user$project$Main$viewRadioInput, model, '2017'),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Main$viewRadioInput, model, '2018'),
+									_1: {ctor: '[]'}
+								}
 							}
 						}),
 					_1: {

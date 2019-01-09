@@ -80,12 +80,57 @@ songs2017 =
         , songName = "Bomba Estereo - Amar Asi"
         , id = "song8"
         },
-        { songSource = "songs/2017/Run the Jewels - Call Ticketron.webm"
-        , songName = "Run the Jewels - Call Ticketron"
+        { songSource = "songs/2017/Kevin Morby - City Music.webm"
+        , songName = "Kevin Morby - City Music"
         , id = "song9"
         },
         { songSource = "songs/2017/Beck - Up All Night.webm"
         , songName = "Beck - Up All Night"
+        , id = "song10"
+        }
+    ]
+
+songs2018 : List{ id : String, songName : String, songSource : String }
+songs2018 =
+    [
+        { songSource = "songs/2018/MJ Cole - Soak It Up.webm"
+        , songName = "MJ Cole - Soak It Up"
+        , id = "song1"
+        },
+        { songSource = "songs/2018/Cleo Sol - Miles Song.webm"
+        , songName = "Cleo Sol - Miles Song"
+        , id = "song2"
+        },
+        { songSource = "songs/2018/D Double E - Back Then.webm"
+        , songName = "D Double E - Back Then"
+        , id = "song3"
+        },
+        { songSource = "songs/2018/Spice Boys - Spice City Boys.m4a"
+        , songName = "Spice Boys - Spice City Boys"
+        , id = "song4"
+        },
+        { songSource = "songs/2018/Little Simz - Offence.webm"
+        , songName = "Little Simz - Offence"
+        , id = "song5"
+        },
+        { songSource = "songs/2018/Georgia Anne Muldrow - Overload.webm"
+        , songName = "Georgia Anne Muldrow - Overload"
+        , id = "song6"
+        },
+        { songSource = "songs/2018/Blue Wednesday - Suede.webm"
+        , songName = "Blue Wednesday - Suede"
+        , id = "song7"
+        },
+        { songSource = "songs/2018/Nu Guinea - Ddoje Facce.webm"
+        , songName = "Nu Guinea - Ddoje Facce"
+        , id = "song8"
+        },
+        { songSource = "songs/2018/The Internet - Come Together.webm"
+        , songName = "The Internet - Come Together"
+        , id = "song9"
+        },
+        { songSource = "songs/2018/The True Loves - The Dapper Derp.m4a"
+        , songName = "The True Loves - The Dapper Derp"
         , id = "song10"
         }
     ]

@@ -92,6 +92,8 @@ update msg model =
                     ( { model | songs = songs2016, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
                 "2017" ->
                     ( { model | songs = songs2017, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
+                "2018" ->
+                    ( { model | songs = songs2018, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
                 _ ->
                     ( { model | songs = [], activePlaylist = False, playing = False, style = animation 0 |> from 0 |> to 0 }, Cmd.none )
         Play ->
@@ -106,7 +108,7 @@ update msg model =
             ( { model | currentSongId = msg }, Cmd.none )
         SetSongName msg ->
             ( { model | currentSongName = msg }, Cmd.none )
-        NextSong msg ->
+        NextSong _ ->
             songToPlay model
         PlayNextSong ->
             songToPlay model
@@ -124,11 +126,6 @@ update msg model =
                     ( { model | currentSongId = song, position = model.position - 1 }, Port.previous ([model.currentSongId, song]) )
         CurrentTick time ->
             ( { model | currentBrowserTime = time }, Cmd.none)
-        -- Animate animMsg ->
-        --     ( { model
-        --         | style = Animation.update animMsg model.style
-        --       }
-        --     , Cmd.none
 
 animateOpacity : Time.Time -> Animation
 animateOpacity browserTime =
@@ -153,6 +150,7 @@ view model =
             [ div [ class "radios" ]
                 [ viewRadioInput model "2016"
                 , viewRadioInput model "2017"
+                , viewRadioInput model "2018"
                 ],
               viewPlaylist model
             ]
@@ -175,7 +173,7 @@ viewRadioInput model year =
     div [ class "" ]
     [ label [ class "list-container" ]
           [ input [ type_ "radio", onClick (Select year), checked (model.playlist == year) ] []
-          , text ("Top Ten Songs, " ++ year)
+          , text ("Top Songs, " ++ year)
           , span [ class "radio-btn" ] []
           ]
     ]
@@ -205,7 +203,7 @@ viewTitle title =
 
 audioSong : Song -> Html Msg
 audioSong song =
-    li [ class "songs"]
+    li [ class "songs" ]
         [ text song.songName
         , audio
             [ onTimeUpdate UpdateTime
