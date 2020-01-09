@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2019 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2019/MorMor - Pass The Hours.webm', songName: 'MorMor - Pass The Hours', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2019/SAULT - Why Why Why Why Why.m4a', songName: 'SAULT - Why Why Why Why Why', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2019/Vin Gordon - African Shores.m4a', songName: 'Vin Gordon - African Shores', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2019/Sampa The Great - Final Form.webm', songName: 'Sampa The Great - Final Form', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2019/Little Simz - Selfish.webm', songName: 'Little Simz - Selfish', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2019/slowthai - Toaster.webm', songName: 'slowthai - Toaster', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2019/Ibibio Sound Machine - Wanna Come Down.webm', songName: 'Ibibio Sound Machine - Wanna Come Down', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2019/DAM - Prozac.webm', songName: 'DAM - Prozac', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2019/Bronko Yotte - Matanga.webm', songName: 'Bronko Yotte - Matanga', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2019/Loyle Carner - Angel.webm', songName: 'Loyle Carner - Angel', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2018 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2018/MJ Cole - Soak It Up.webm', songName: 'MJ Cole - Soak It Up', id: 'song1'},
@@ -9731,7 +9772,7 @@ var _user$project$SongLibrary$songs2016 = {
 		_0: {songSource: 'songs/2016/Xenia Rubinos - Mexican Chef.webm', songName: 'Xenia Rubinos - Mexican Chef', id: 'song2'},
 		_1: {
 			ctor: '::',
-			_0: {songSource: 'songs/2016/Klaus Johann Grobe - Geschichten aus erster Hand.webm', songName: 'Klaus Johann Grobe - Geschichten aus erster Hand', id: 'song3'},
+			_0: {songSource: 'songs/2016/Run the Jewels - Legend Has It.webm', songName: 'Run the Jewels - Legend Has It', id: 'song3'},
 			_1: {
 				ctor: '::',
 				_0: {songSource: 'songs/2016/Acapulco Lips - Awkward Waltz.m4a', songName: 'Acapulco Lips - Awkward Waltz', id: 'song4'},
@@ -9949,6 +9990,20 @@ var _user$project$Main$update = F2(
 								model,
 								{
 									songs: _user$project$SongLibrary$songs2018,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case '2019':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2019,
 									activePlaylist: true,
 									playing: false,
 									playlist: _p2,
@@ -10492,7 +10547,11 @@ var _user$project$Main$view = function (model) {
 								_1: {
 									ctor: '::',
 									_0: A2(_user$project$Main$viewRadioInput, model, '2018'),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Main$viewRadioInput, model, '2019'),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}),
