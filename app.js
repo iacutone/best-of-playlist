@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2020 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2020/Caribou - You and I.m4a', songName: 'Caribou - You and I', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2020/Dua Lipa - Levitating.m4a', songName: 'Dua Lipa - Levitating', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2020/HAIM - Summer Girl.m4a', songName: 'HAIM - Summer Girl', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2020/Run The Jewels - JU$T.m4a', songName: 'Run The Jewels - JU$T', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2020/Fontaines D.C. - Televised Mind.m4a', songName: 'Fontaines D.C. - Televised Mind', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2020/Moses Boyd - Shades Of You.m4a', songName: 'Moses Boyd - Shades Of You', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2020/Tiana Major9 - Think About You.m4a', songName: 'Tiana Major9 - Think About You', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2020/TOKiMONSTA - Renter\'s Anthem.m4a', songName: 'TOKiMONSTA - Renter\'s Anthem', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2020/Ultraísta - Tin King.m4a', songName: 'Ultraísta - Tin King', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2020/The Flaming Lips - Will You Return.m4a', songName: 'The Flaming Lips - Will You Return/When You Come Down', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2019 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2019/MorMor - Pass The Hours.webm', songName: 'MorMor - Pass The Hours', id: 'song1'},
@@ -10004,6 +10045,20 @@ var _user$project$Main$update = F2(
 								model,
 								{
 									songs: _user$project$SongLibrary$songs2019,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case '2020':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2020,
 									activePlaylist: true,
 									playing: false,
 									playlist: _p2,
@@ -10550,7 +10605,11 @@ var _user$project$Main$view = function (model) {
 									_1: {
 										ctor: '::',
 										_0: A2(_user$project$Main$viewRadioInput, model, '2019'),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$Main$viewRadioInput, model, '2020'),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}

@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -176,6 +176,51 @@ songs2019 =
       }
     , { songSource = "songs/2019/Loyle Carner - Angel.webm"
       , songName = "Loyle Carner - Angel"
+      , id = "song10"
+      }
+    ]
+
+
+songs2020 : List { id : String, songName : String, songSource : String }
+songs2020 =
+    [ { songSource = "songs/2020/Caribou - You and I.m4a"
+      , songName = "Caribou - You and I"
+      , id = "song1"
+      }
+    , { songSource = "songs/2020/Dua Lipa - Levitating.m4a"
+      , songName = "Dua Lipa - Levitating"
+      , id = "song2"
+      }
+    , { songSource = "songs/2020/HAIM - Summer Girl.m4a"
+      , songName = "HAIM - Summer Girl"
+      , id = "song3"
+      }
+    , { songSource = "songs/2020/Run The Jewels - JU$T.m4a"
+      , songName = "Run The Jewels - JU$T"
+      , id = "song4"
+      }
+    , { songSource = "songs/2020/Fontaines D.C. - Televised Mind.m4a"
+      , songName = "Fontaines D.C. - Televised Mind"
+      , id = "song5"
+      }
+    , { songSource = "songs/2020/Moses Boyd - Shades Of You.m4a"
+      , songName = "Moses Boyd - Shades Of You"
+      , id = "song6"
+      }
+    , { songSource = "songs/2020/Tiana Major9 - Think About You.m4a"
+      , songName = "Tiana Major9 - Think About You"
+      , id = "song7"
+      }
+    , { songSource = "songs/2020/TOKiMONSTA - Renter's Anthem.m4a"
+      , songName = "TOKiMONSTA - Renter's Anthem"
+      , id = "song8"
+      }
+    , { songSource = "songs/2020/Ultraísta - Tin King.m4a"
+      , songName = "Ultraísta - Tin King"
+      , id = "song9"
+      }
+    , { songSource = "songs/2020/The Flaming Lips - Will You Return.m4a"
+      , songName = "The Flaming Lips - Will You Return/When You Come Down"
       , id = "song10"
       }
     ]
