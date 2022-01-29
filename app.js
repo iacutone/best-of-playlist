@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2021 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2021/The Far East - NYC Dream.m4a', songName: 'The Far East - NYC Dream', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2021/Japanese Breakfast - Be Sweet.m4a', songName: 'Japanese Breakfast - Be Sweet', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2021/Billie Eilish - Your Power.m4a', songName: 'Billie Eilish - Your Power', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2021/Arlo Parks - Hurt.m4a', songName: 'Arlo Parks - Hurt', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2021/Hiatus Kaiyote - Get Sun.m4a', songName: 'Hiatus Kaiyote - Get Sun', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2021/SAULT - Bitter Streets.m4a', songName: 'SAULT - Bitter Streets', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2021/Madlib - Road of the Lonely Ones.m4a', songName: 'Madlib - Road of the Lonely Ones', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2021/Delvon Lamarr Organ Trio - Aces.m4a', songName: 'Delvon Lamarr Organ Trio - Aces', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2021/Elkka - Burnt Orange.m4a', songName: 'Elkka - Burnt Orange', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2021/Cobra Man - Powered Up.m4a', songName: 'Cobra Man - Powered Up', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2020 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2020/Caribou - You and I.m4a', songName: 'Caribou - You and I', id: 'song1'},
@@ -10059,6 +10100,20 @@ var _user$project$Main$update = F2(
 								model,
 								{
 									songs: _user$project$SongLibrary$songs2020,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case '2021':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2021,
 									activePlaylist: true,
 									playing: false,
 									playlist: _p2,
@@ -10608,7 +10663,11 @@ var _user$project$Main$view = function (model) {
 										_1: {
 											ctor: '::',
 											_0: A2(_user$project$Main$viewRadioInput, model, '2020'),
-											_1: {ctor: '[]'}
+											_1: {
+												ctor: '::',
+												_0: A2(_user$project$Main$viewRadioInput, model, '2021'),
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								}

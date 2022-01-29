@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -221,6 +221,51 @@ songs2020 =
       }
     , { songSource = "songs/2020/The Flaming Lips - Will You Return.m4a"
       , songName = "The Flaming Lips - Will You Return/When You Come Down"
+      , id = "song10"
+      }
+    ]
+
+
+songs2021 : List { id : String, songName : String, songSource : String }
+songs2021 =
+    [ { songSource = "songs/2021/The Far East - NYC Dream.m4a"
+      , songName = "The Far East - NYC Dream"
+      , id = "song1"
+      }
+    , { songSource = "songs/2021/Japanese Breakfast - Be Sweet.m4a"
+      , songName = "Japanese Breakfast - Be Sweet"
+      , id = "song2"
+      }
+    , { songSource = "songs/2021/Billie Eilish - Your Power.m4a"
+      , songName = "Billie Eilish - Your Power"
+      , id = "song3"
+      }
+    , { songSource = "songs/2021/Arlo Parks - Hurt.m4a"
+      , songName = "Arlo Parks - Hurt"
+      , id = "song4"
+      }
+    , { songSource = "songs/2021/Hiatus Kaiyote - Get Sun.m4a"
+      , songName = "Hiatus Kaiyote - Get Sun"
+      , id = "song5"
+      }
+    , { songSource = "songs/2021/SAULT - Bitter Streets.m4a"
+      , songName = "SAULT - Bitter Streets"
+      , id = "song6"
+      }
+    , { songSource = "songs/2021/Madlib - Road of the Lonely Ones.m4a"
+      , songName = "Madlib - Road of the Lonely Ones"
+      , id = "song7"
+      }
+    , { songSource = "songs/2021/Delvon Lamarr Organ Trio - Aces.m4a"
+      , songName = "Delvon Lamarr Organ Trio - Aces"
+      , id = "song8"
+      }
+    , { songSource = "songs/2021/Elkka - Burnt Orange.m4a"
+      , songName = "Elkka - Burnt Orange"
+      , id = "song9"
+      }
+    , { songSource = "songs/2021/Cobra Man - Powered Up.m4a"
+      , songName = "Cobra Man - Powered Up"
       , id = "song10"
       }
     ]
