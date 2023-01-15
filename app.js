@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2022 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2022/The Weeknd - Sacrifice.m4a', songName: 'The Weeknd - Sacrifice', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2022/Trueno - DANCE CRIP.m4a', songName: 'Trueno - DANCE CRIP', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2022/The Smile - The Smoke.m4a', songName: 'The Smile - The Smoke', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2022/Fontaines D.C. - I Love You.m4a', songName: 'Fontaines D.C. - I Love You', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2022/Wet Leg - Being In Love.m4a', songName: 'Wet Leg - Being In Love', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2022/Jessie Reyez - ONLY ONE.m4a', songName: 'Jessie Reyez - ONLY ONE', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2022/Santigold - High Priestess.m4a', songName: 'Santigold - High Priestess', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2022/Little Dragon - Frisco.m4a', songName: 'Little Dragon - Frisco', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2022/Yeah Yeah Yeahs - Spitting Off the Edge of the World.m4a', songName: 'Yeah Yeah Yeahs - Spitting Off the Edge of the World', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2022/Stromae - L’enfer.m4a', songName: 'Stromae - L’enfer', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2021 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2021/The Far East - NYC Dream.m4a', songName: 'The Far East - NYC Dream', id: 'song1'},
@@ -10114,6 +10155,20 @@ var _user$project$Main$update = F2(
 								model,
 								{
 									songs: _user$project$SongLibrary$songs2021,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case '2022':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2022,
 									activePlaylist: true,
 									playing: false,
 									playlist: _p2,
@@ -10666,7 +10721,11 @@ var _user$project$Main$view = function (model) {
 											_1: {
 												ctor: '::',
 												_0: A2(_user$project$Main$viewRadioInput, model, '2021'),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: A2(_user$project$Main$viewRadioInput, model, '2022'),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}

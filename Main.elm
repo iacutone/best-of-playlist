@@ -121,6 +121,9 @@ update msg model =
                 "2021" ->
                     ( { model | songs = songs2021, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
 
+                "2022" ->
+                    ( { model | songs = songs2022, activePlaylist = True, playing = False, playlist = playlist, style = animateOpacity model.currentBrowserTime }, Cmd.none )
+
                 _ ->
                     ( { model | songs = [], activePlaylist = False, playing = False, style = animation 0 |> from 0 |> to 0 }, Cmd.none )
 
@@ -203,6 +206,7 @@ view model =
                 , viewRadioInput model "2019"
                 , viewRadioInput model "2020"
                 , viewRadioInput model "2021"
+                , viewRadioInput model "2022"
                 ]
             , viewPlaylist model
             ]

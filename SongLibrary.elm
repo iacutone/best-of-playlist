@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -266,6 +266,50 @@ songs2021 =
       }
     , { songSource = "songs/2021/Cobra Man - Powered Up.m4a"
       , songName = "Cobra Man - Powered Up"
+      , id = "song10"
+      }
+    ]
+
+songs2022 : List { id : String, songName : String, songSource : String }
+songs2022 =
+    [ { songSource = "songs/2022/The Weeknd - Sacrifice.m4a"
+      , songName = "The Weeknd - Sacrifice"
+      , id = "song1"
+      }
+    , { songSource = "songs/2022/Trueno - DANCE CRIP.m4a"
+      , songName = "Trueno - DANCE CRIP"
+      , id = "song2"
+      }
+    , { songSource = "songs/2022/The Smile - The Smoke.m4a"
+      , songName = "The Smile - The Smoke"
+      , id = "song3"
+      }
+    , { songSource = "songs/2022/Fontaines D.C. - I Love You.m4a"
+      , songName = "Fontaines D.C. - I Love You"
+      , id = "song4"
+      }
+    , { songSource = "songs/2022/Wet Leg - Being In Love.m4a"
+      , songName = "Wet Leg - Being In Love"
+      , id = "song5"
+      }
+    , { songSource = "songs/2022/Jessie Reyez - ONLY ONE.m4a"
+      , songName = "Jessie Reyez - ONLY ONE"
+      , id = "song6"
+      }
+    , { songSource = "songs/2022/Santigold - High Priestess.m4a"
+      , songName = "Santigold - High Priestess"
+      , id = "song7"
+      }
+    , { songSource = "songs/2022/Little Dragon - Frisco.m4a"
+      , songName = "Little Dragon - Frisco"
+      , id = "song8"
+      }
+    , { songSource = "songs/2022/Yeah Yeah Yeahs - Spitting Off the Edge of the World.m4a"
+      , songName = "Yeah Yeah Yeahs - Spitting Off the Edge of the World"
+      , id = "song9"
+      }
+    , { songSource = "songs/2022/Stromae - L’enfer.m4a"
+      , songName = "Stromae - L’enfer"
       , id = "song10"
       }
     ]
