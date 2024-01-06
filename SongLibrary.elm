@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022, songs2023)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -310,6 +310,50 @@ songs2022 =
       }
     , { songSource = "songs/2022/Stromae - L’enfer.m4a"
       , songName = "Stromae - L’enfer"
+      , id = "song10"
+      }
+    ]
+
+songs2023 : List { id : String, songName : String, songSource : String }
+songs2023 =
+    [ { songSource = "songs/2023/Laufey - From The Start.m4a"
+      , songName = "Laufey - From The Start"
+      , id = "song1"
+      }
+    , { songSource = "songs/2023/Jessy Lanza - Limbo.m4a"
+      , songName = "Jessy Lanza - Limbo"
+      , id = "song2"
+      }
+    , { songSource = "songs/2023/The Oh Sees - Stunner.m4a"
+      , songName = "The Oh Sees - Stunner"
+      , id = "song3"
+      }
+    , { songSource = "songs/2023/Tony Allen & Adrian Younge - Lagos.m4a"
+      , songName = "Tony Allen & Adrian Younge - Lagos"
+      , id = "song4"
+      }
+    , { songSource = "songs/2023/Olivia Rodrigo - bad idea right?.m4a"
+      , songName = "Olivia Rodrigo - bad idea right?"
+      , id = "song5"
+      }
+    , { songSource = "songs/2023/Hiromi - Sonicwonderland.m4a"
+      , songName = "Hiromi - Sonicwonderland"
+      , id = "song6"
+      }
+    , { songSource = "songs/2023/Little Dragon - Lily's Call (Live on KEXP).m4a"
+      , songName = "Little Dragon - Lily's Call (Live on KEXP)"
+      , id = "song7"
+      }
+    , { songSource = "songs/2023/Arlo Parks - Blades (Live at WFUV).m4a"
+      , songName = "Arlo Parks - Blades (Live at WFUV)"
+      , id = "song8"
+      }
+    , { songSource = "songs/2023/Aphex Twin - Blackbox Life Recorder 21f.m4a"
+      , songName = "Aphex Twin - Blackbox Life Recorder 21f"
+      , id = "song9"
+      }
+    , { songSource = "songs/2023/The Smile - Bending Hectic.m4a"
+      , songName = "The Smile - Bending Hectic"
       , id = "song10"
       }
     ]

@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2023 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2023/Laufey - From The Start.m4a', songName: 'Laufey - From The Start', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2023/Jessy Lanza - Limbo.m4a', songName: 'Jessy Lanza - Limbo', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2023/The Oh Sees - Stunner.m4a', songName: 'The Oh Sees - Stunner', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2023/Tony Allen & Adrian Younge - Lagos.m4a', songName: 'Tony Allen & Adrian Younge - Lagos', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2023/Olivia Rodrigo - bad idea right?.m4a', songName: 'Olivia Rodrigo - bad idea right?', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2023/Hiromi - Sonicwonderland.m4a', songName: 'Hiromi - Sonicwonderland', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2023/Little Dragon - Lily\'s Call (Live on KEXP).m4a', songName: 'Little Dragon - Lily\'s Call (Live on KEXP)', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2023/Arlo Parks - Blades (Live at WFUV).m4a', songName: 'Arlo Parks - Blades (Live at WFUV)', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2023/Aphex Twin - Blackbox Life Recorder 21f.m4a', songName: 'Aphex Twin - Blackbox Life Recorder 21f', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2023/The Smile - Bending Hectic.m4a', songName: 'The Smile - Bending Hectic', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2022 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2022/The Weeknd - Sacrifice.m4a', songName: 'The Weeknd - Sacrifice', id: 'song1'},
@@ -10169,6 +10210,20 @@ var _user$project$Main$update = F2(
 								model,
 								{
 									songs: _user$project$SongLibrary$songs2022,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case '2023':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2023,
 									activePlaylist: true,
 									playing: false,
 									playlist: _p2,
@@ -10724,7 +10779,11 @@ var _user$project$Main$view = function (model) {
 												_1: {
 													ctor: '::',
 													_0: A2(_user$project$Main$viewRadioInput, model, '2022'),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: A2(_user$project$Main$viewRadioInput, model, '2023'),
+														_1: {ctor: '[]'}
+													}
 												}
 											}
 										}
