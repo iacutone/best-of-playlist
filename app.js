@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2024 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2024/Ibibio Sound Machine - Fire.m4a', songName: 'Ibibio Sound Machine - Fire', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2024/Frente Cumbiero - El Tereminé.m4a', songName: 'Frente Cumbiero - El Tereminé', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2024/CA7RIEL & Paco Amoroso - EL ÚNICO.m4a', songName: 'CA7RIEL & Paco Amoroso - EL ÚNICO', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2024/Fontaines D.C. - Starburster.m4a', songName: 'Fontaines D.C. - Starburster', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2024/Khruangbin - Pon Pón.m4a', songName: 'Khruangbin - Pon Pón', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2024/The Marías - Real Life.m4a', songName: 'The Marías - Real Life', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2024/Vampire Weekend - Connect.m4a', songName: 'Vampire Weekend - Connect', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2024/Sabrina Carpenter - Bed Chem.m4a', songName: 'Sabrina Carpenter - Bed Chem', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2024/Baby Rose - On My Mind.m4a', songName: 'Baby Rose - On My Mind', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2024/Aphex Twin - 3.m4a', songName: 'Aphex Twin - #3', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2023 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2023/Laufey - From The Start.m4a', songName: 'Laufey - From The Start', id: 'song1'},
@@ -10231,6 +10272,20 @@ var _user$project$Main$update = F2(
 								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
+					case '2024':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2024,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 					default:
 						return {
 							ctor: '_Tuple2',
@@ -10782,7 +10837,11 @@ var _user$project$Main$view = function (model) {
 													_1: {
 														ctor: '::',
 														_0: A2(_user$project$Main$viewRadioInput, model, '2023'),
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: A2(_user$project$Main$viewRadioInput, model, '2024'),
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											}

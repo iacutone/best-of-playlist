@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022, songs2023)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022, songs2023, songs2024)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -354,6 +354,50 @@ songs2023 =
       }
     , { songSource = "songs/2023/The Smile - Bending Hectic.m4a"
       , songName = "The Smile - Bending Hectic"
+      , id = "song10"
+      }
+    ]
+
+songs2024 : List { id : String, songName : String, songSource : String }
+songs2024 =
+    [ { songSource = "songs/2024/Ibibio Sound Machine - Fire.m4a"
+      , songName = "Ibibio Sound Machine - Fire"
+      , id = "song1"
+      }
+    , { songSource = "songs/2024/Frente Cumbiero - El Tereminé.m4a"
+      , songName = "Frente Cumbiero - El Tereminé"
+      , id = "song2"
+      }
+    , { songSource = "songs/2024/CA7RIEL & Paco Amoroso - EL ÚNICO.m4a"
+      , songName = "CA7RIEL & Paco Amoroso - EL ÚNICO"
+      , id = "song3"
+      }
+    , { songSource = "songs/2024/Fontaines D.C. - Starburster.m4a"
+      , songName = "Fontaines D.C. - Starburster"
+      , id = "song4"
+      }
+    , { songSource = "songs/2024/Khruangbin - Pon Pón.m4a"
+      , songName = "Khruangbin - Pon Pón"
+      , id = "song5"
+      }
+    , { songSource = "songs/2024/The Marías - Real Life.m4a"
+      , songName = "The Marías - Real Life"
+      , id = "song6"
+      }
+    , { songSource = "songs/2024/Vampire Weekend - Connect.m4a"
+      , songName = "Vampire Weekend - Connect"
+      , id = "song7"
+      }
+    , { songSource = "songs/2024/Sabrina Carpenter - Bed Chem.m4a"
+      , songName = "Sabrina Carpenter - Bed Chem"
+      , id = "song8"
+      }
+    , { songSource = "songs/2024/Baby Rose - On My Mind.m4a"
+      , songName = "Baby Rose - On My Mind"
+      , id = "song9"
+      }
+    , { songSource = "songs/2024/Aphex Twin - 3.m4a"
+      , songName = "Aphex Twin - #3"
       , id = "song10"
       }
     ]
