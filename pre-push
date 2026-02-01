@@ -10,3 +10,8 @@ cp index.html build/index.html
 
 s3cmd sync --recursive build/ s3://best-of-playlist
 echo -e "\t Successfully deployed to S3"
+
+# Bust CloudFront cache
+echo -e "\t Invalidating CloudFront cache..."
+aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
+echo -e "\t CloudFront cache invalidation initiated"
