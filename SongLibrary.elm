@@ -1,4 +1,4 @@
-module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022, songs2023, songs2024)
+module SongLibrary exposing (songs2016, songs2017, songs2018, songs2019, songs2020, songs2021, songs2022, songs2023, songs2024, songs2025)
 
 
 songs2016 : List { id : String, songName : String, songSource : String }
@@ -398,6 +398,50 @@ songs2024 =
       }
     , { songSource = "songs/2024/Aphex Twin - 3.m4a"
       , songName = "Aphex Twin - #3"
+      , id = "song10"
+      }
+    ]
+
+songs2025 : List { id : String, songName : String, songSource : String }
+songs2025 =
+    [ { songSource = "songs/2025/Florence Adooni - Vocalize My Luv.m4a"
+      , songName = "Florence Adooni - Vocalize My Luv"
+      , id = "song1"
+      }
+    , { songSource = "songs/2025/Jessie Reyez - GOLIATH.m4a"
+      , songName = "Jessie Reyez - GOLIATH"
+      , id = "song2"
+      }
+    , { songSource = "songs/2025/Kokoroko - Sweetie.m4a"
+      , songName = "Kokoroko - Sweetie"
+      , id = "song3"
+      }
+    , { songSource = "songs/2025/Lizzo - Still Bad.m4a"
+      , songName = "Lizzo - Still Bad"
+      , id = "song4"
+      }
+    , { songSource = "songs/2025/PinkPantheress - Illegal.m4a"
+      , songName = "PinkPantheress - Illegal"
+      , id = "song5"
+      }
+    , { songSource = "songs/2025/Pixel Grip - Reason To Stay (Live on KEXP).m4a"
+      , songName = "Pixel Grip - Reason To Stay (Live on KEXP)"
+      , id = "song6"
+      }
+    , { songSource = "songs/2025/SAULT - I.L.T.S..m4a"
+      , songName = "SAULT - I.L.T.S."
+      , id = "song7"
+      }
+    , { songSource = "songs/2025/WITCH - Queenless King.m4a"
+      , songName = "WITCH - Queenless King"
+      , id = "song8"
+      }
+    , { songSource = "songs/2025/Wet Leg - catch these fists.m4a"
+      , songName = "Wet Leg - catch these fists"
+      , id = "song9"
+      }
+    , { songSource = "songs/2025/bbno$ - two.m4a"
+      , songName = "bbno$ - two"
       , id = "song10"
       }
     ]

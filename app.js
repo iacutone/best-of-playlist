@@ -9641,6 +9641,47 @@ var _user$project$Port$setDuration = _elm_lang$core$Native_Platform.incomingPort
 var _user$project$Port$setSongId = _elm_lang$core$Native_Platform.incomingPort('setSongId', _elm_lang$core$Json_Decode$string);
 var _user$project$Port$setSongName = _elm_lang$core$Native_Platform.incomingPort('setSongName', _elm_lang$core$Json_Decode$string);
 
+var _user$project$SongLibrary$songs2025 = {
+	ctor: '::',
+	_0: {songSource: 'songs/2025/Florence Adooni - Vocalize My Luv.m4a', songName: 'Florence Adooni - Vocalize My Luv', id: 'song1'},
+	_1: {
+		ctor: '::',
+		_0: {songSource: 'songs/2025/Jessie Reyez - GOLIATH.m4a', songName: 'Jessie Reyez - GOLIATH', id: 'song2'},
+		_1: {
+			ctor: '::',
+			_0: {songSource: 'songs/2025/Kokoroko - Sweetie.m4a', songName: 'Kokoroko - Sweetie', id: 'song3'},
+			_1: {
+				ctor: '::',
+				_0: {songSource: 'songs/2025/Lizzo - Still Bad.m4a', songName: 'Lizzo - Still Bad', id: 'song4'},
+				_1: {
+					ctor: '::',
+					_0: {songSource: 'songs/2025/PinkPantheress - Illegal.m4a', songName: 'PinkPantheress - Illegal', id: 'song5'},
+					_1: {
+						ctor: '::',
+						_0: {songSource: 'songs/2025/Pixel Grip - Reason To Stay (Live on KEXP).m4a', songName: 'Pixel Grip - Reason To Stay (Live on KEXP)', id: 'song6'},
+						_1: {
+							ctor: '::',
+							_0: {songSource: 'songs/2025/SAULT - I.L.T.S..m4a', songName: 'SAULT - I.L.T.S.', id: 'song7'},
+							_1: {
+								ctor: '::',
+								_0: {songSource: 'songs/2025/WITCH - Queenless King.m4a', songName: 'WITCH - Queenless King', id: 'song8'},
+								_1: {
+									ctor: '::',
+									_0: {songSource: 'songs/2025/Wet Leg - catch these fists.m4a', songName: 'Wet Leg - catch these fists', id: 'song9'},
+									_1: {
+										ctor: '::',
+										_0: {songSource: 'songs/2025/bbno$ - two.m4a', songName: 'bbno$ - two', id: 'song10'},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
 var _user$project$SongLibrary$songs2024 = {
 	ctor: '::',
 	_0: {songSource: 'songs/2024/Ibibio Sound Machine - Fire.m4a', songName: 'Ibibio Sound Machine - Fire', id: 'song1'},
@@ -10286,6 +10327,20 @@ var _user$project$Main$update = F2(
 								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
+					case '2025':
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									songs: _user$project$SongLibrary$songs2025,
+									activePlaylist: true,
+									playing: false,
+									playlist: _p2,
+									style: _user$project$Main$animateOpacity(model.currentBrowserTime)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
 					default:
 						return {
 							ctor: '_Tuple2',
@@ -10840,7 +10895,11 @@ var _user$project$Main$view = function (model) {
 														_1: {
 															ctor: '::',
 															_0: A2(_user$project$Main$viewRadioInput, model, '2024'),
-															_1: {ctor: '[]'}
+															_1: {
+																ctor: '::',
+																_0: A2(_user$project$Main$viewRadioInput, model, '2025'),
+																_1: {ctor: '[]'}
+															}
 														}
 													}
 												}
